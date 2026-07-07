@@ -49,7 +49,7 @@ io.on("connection", (socket) => {
 const PORT = process.env.PORT || 4000;
 
 httpServer.listen(PORT, () => {
-  console.log(`Socket.IO server is running on ${PORT}`);
+  console.log(`Socket.IO server for Express is running on ${PORT}`);
 });
 
 
