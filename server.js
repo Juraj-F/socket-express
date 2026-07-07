@@ -12,6 +12,8 @@ const httpServer = http.createServer((req, res) => {
 });
 
 const allowedOrigins = [
+  process.env.CLIENT_SITE_URL,
+  "http://localhost:5173",
   "http://localhost:3000",
   "http://localhost:3001",
   process.env.CLIENT_URL,
@@ -44,7 +46,36 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("Client disconnected:", socket.id);
   });
+
+  socket.on("task:created", (task) => {
+    io.emit("task:created", task);
+  });
+
+  socket.on("task:updated", (task) => {
+    io.emit("task:updated", task);
+  });
+
+  socket.on("task:deleted", ({ id }) => {
+    io.emit("task:deleted", { id });
+  });
+
+  socket.on("project:created", (project) => {
+    io.emit("project:created", project);
+  });
+
+  socket.on("project:updated", (project) => {
+    io.emit("project:updated", project);
+  });
+
+  socket.on("project:deleted", ({ id }) => {
+    io.emit("project:deleted", { id });
+  });
+
+  socket.on("disconnect", () => {
+    console.log("Client disconnected:", socket.id);
+  });
 });
+
 
 const PORT = process.env.PORT || 4000;
 
