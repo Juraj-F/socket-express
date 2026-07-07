@@ -71,15 +71,10 @@ io.on("connection", (socket) => {
   socket.on("project:deleted", ({ id }) => {
     io.emit("project:deleted", { id });
   });
+})
 
 const PORT = process.env.PORT || 4000;
 
 httpServer.listen(PORT, () => {
   console.log(`Socket.IO server for Express is running on ${PORT}`);
-});
-
-
-
-
-
-
+})
