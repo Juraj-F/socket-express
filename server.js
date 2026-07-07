@@ -49,6 +49,7 @@ io.on("connection", (socket) => {
 
   socket.on("task:created", (task) => {
     io.emit("task:created", task);
+    console.log("created starts on socket", task)
   });
 
   socket.on("task:updated", (task) => {
@@ -70,12 +71,6 @@ io.on("connection", (socket) => {
   socket.on("project:deleted", ({ id }) => {
     io.emit("project:deleted", { id });
   });
-
-  socket.on("disconnect", () => {
-    console.log("Client disconnected:", socket.id);
-  });
-});
-
 
 const PORT = process.env.PORT || 4000;
 
