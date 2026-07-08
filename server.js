@@ -12,12 +12,12 @@ const httpServer = http.createServer((req, res) => {
 });
 
 const allowedOrigins = [
-  process.env.CLIENT_SITE_URL,
+  "https://app.taskmeup.com",
   "http://localhost:5173",
   "http://localhost:3000",
   "http://localhost:3001",
-  process.env.CLIENT_URL,
 ].filter(Boolean);
+
 
 console.log("CLIENT_URL:", process.env.CLIENT_URL);
 
@@ -61,6 +61,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("project:created", (project) => {
+    console.log("project in socket", project)
     io.emit("project:created", project);
   });
 
